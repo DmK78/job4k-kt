@@ -10,6 +10,7 @@ fun draw(size: Int) {
         ) + "X"
         println(str)
     }
+
 }
 
 fun main() {
