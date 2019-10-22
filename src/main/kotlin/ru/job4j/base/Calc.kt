@@ -1,4 +1,6 @@
-package ru.job4j.base.ru.job4j.base
+package ru.job4j.base
+
+
 
 fun add(first: Int, second: Int): Int {
     return first + second
