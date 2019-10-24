@@ -9,12 +9,12 @@ class Student(var name: String = "") {
         this.surName = surName
     }
 
-    constructor(name: String, surName: String, email: String) : this(name,surName) {
+    constructor(name: String, surName: String, email: String) : this(name, surName) {
 
         this.email = email
     }
 
-    constructor(name: String, surName: String, email: String, phone: String) : this(name,surName,email) {
+    constructor(name: String, surName: String, email: String, phone: String) : this(name, surName, email) {
         this.phone = phone
     }
 
