@@ -1,5 +1,5 @@
-# используем язык java. Travis CI поддерживает другие языки тоже.
-language: java
+﻿# используем язык java. Travis CI поддерживает другие языки тоже.
+language: kotlin
 jdk:
   - openjdk11
 
