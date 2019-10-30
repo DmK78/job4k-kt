@@ -4,78 +4,35 @@ import java.util.ArrayList
 
 class Tracker {
     private val items = ArrayList<Item>()
-    private var position = 0
-
-    fun getPosition() = position
 
     fun add(item: Item): Item {
-        item.setId(this.generateId())
+        item.setId(generateId())
         item.setTime(System.currentTimeMillis())
-        this.items.add(this.position++, item)
+        items.add(item)
         return item
     }
 
-    fun delete(item: Item): Boolean {
-        var result = false
-        val posToDel = findItemPos(item.getId())
-        if (posToDel != -1) {
-            result = true
-            items.removeAt(posToDel)
-            this.position--
-        }
-        return result
+    fun delete(id: Int): Boolean = items.remove(findById(id))
+
+    fun getSize(): Int = items.size
+
+
+    fun replace(id: Int, item: Item): Boolean {
+        var findItem = findById(id)
+        if (findItem != null) {
+            findItem.setName(item.getName())
+            findItem.setDesc(item.getDesc())
+            return true
+        } else return false
     }
 
-    fun replace(id: String, item: Item): Boolean {
-        var result = false
-        val posToReplace = findItemPos(id)
-        if (posToReplace >= 0) {
-            result = true
-            items[posToReplace] = item
-        }
-        return result
+    fun findAll(): List<Item> = items
+
+    fun findByName(key: String): List<Item> = items.filter { it.getName().equals(key) }
+
+    fun findById(id: Int): Item? = items.stream().filter { it.getId() == id }.findFirst().orElse(null)
+
+    private fun generateId(): Int {
+        return (Math.random() * 1000).toInt()
     }
-
-    fun findAll(): List<Item> {
-        return items
-    }
-
-    fun findByName(key: String): List<Item> {
-        val result = ArrayList<Item>()
-        for (item in items) {
-            if (item.getName() == key) {
-                result.add(item)
-            }
-        }
-        return result
-    }
-
-    fun findItemPos(id: String): Int {
-        var result = -1
-        for (index in items.indices) {
-            if (items[index].getId() == id) {
-                result = index
-                break
-            }
-        }
-        return result
-    }
-
-    fun findById(id: String): Item? {
-        var result: Item? = null
-        for (item in items) {
-            if (id == item.getId()) {
-                result = item
-                break
-            }
-        }
-        return result
-    }
-
-
-    private fun generateId(): String {
-        return (Math.random() * 1000).toInt().toString()
-    }
-
-
 }

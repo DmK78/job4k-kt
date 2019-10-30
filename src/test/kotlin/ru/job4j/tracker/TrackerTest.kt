@@ -17,12 +17,12 @@ class TrackerTestKt : StringSpec({
 
     "whenReplaceNameThenReturnNewName"{
         val tracker = Tracker()
-        val previous = Item("test1", "testDescription", 123L)
-        tracker.add(previous)
-        val next = Item("test2", "testDescription2", 1234L)
-        next.setId(previous.getId())
-        tracker.replace(previous.getId(), next)
-        tracker.findById(previous.getId())?.getName() shouldBe "test2"
+        val item1 = Item("test1", "testDescription1", 123L)
+        tracker.add(item1)
+        val item2 = Item("test2", "testDescription2", 1234L)
+
+        tracker.replace(item1.getId(), item2)
+        tracker.findById(item1.getId())?.getName() shouldBe "test2"
     }
     "whenDeleteItemThenReturnNewArray"{
         val tracker = Tracker()
@@ -32,8 +32,8 @@ class TrackerTestKt : StringSpec({
         tracker.add(first)
         tracker.add(second)
         tracker.add(third)
-        tracker.delete(second)
-        tracker.getPosition() shouldBe 2
+        tracker.delete(second.getId())
+        tracker.getSize() shouldBe 2
         tracker.findById(first.getId()) shouldBe first
         tracker.findById(third.getId()) shouldBe third
     }
