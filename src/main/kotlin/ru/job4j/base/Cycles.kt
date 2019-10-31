@@ -2,17 +2,20 @@ package ru.job4j.base
 
 fun draw(size: Int) {
 
-    for (value in 0 until size) {
-        val str = if (value < size / 2) "".padStart(value) + "X" + "X".padStart((size - value * 2) - 1)
-        else if (value > size / 2) "X".padStart(size - value) + "X".padStart((value - size / 2) * 2)
-        else "".padStart(
-            value
-        ) + "X"
-        println(str)
+    for (row in 0 ..  size) {
+        for (cell in 0 ..  size) {
+            if(row==cell){
+                print("X")
+            } else if(row==size-cell){
+                print("X")
+            }else print(" ")
+            if(cell==size){
+                println()
+            }
+        }
     }
-
 }
 
 fun main() {
-    draw(11)
+    draw(25)
 }
