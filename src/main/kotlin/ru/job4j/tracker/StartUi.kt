@@ -1,28 +1,32 @@
 package ru.job4j.tracker
 
-import java.util.ArrayList
+class StartUi private constructor(): Action {
+    override fun add() {
+        println("Добавление заявки")
+    }
 
-class StartUi private constructor() {
+    override fun showAll() {
+        println("Печать всех заявок")
+    }
+
+    override fun exit() {
+        return
+    }
+
     companion object {
-        fun addItem(item: Item) {
-            println("Добавление заявки")
-        }
-
-        fun showAll() {
-            println("Печать всех заявок")
-        }
-
         fun init() {
             println("0 - Добавить заявку")
             println("1 - Показать все заявки")
             println("6 - Выйти")
+            val startUi = StartUi()
             do {
                 var i = readLine()!!.toInt()
                 when (i) {
-                    0 -> addItem(Item(name = "1", desc = "1"))
-                    1 -> showAll()
+                    0 -> startUi.add()
+                    1 -> startUi.showAll()
+                    6 -> return
                 }
-            } while (i != 6)
+            } while (true)
         }
     }
 }
