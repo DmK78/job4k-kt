@@ -1,27 +1,59 @@
-﻿# используем язык java. Travis CI поддерживает другие языки тоже.
-language: java
-jdk:
+﻿language: android
+jdk: oraclejdk8
+sudo: false
+os: linux
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-28.0.3
+    - android-27
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - extra-android-support
+
+    # Specify at least one system image,
+    # if you need to run emulator(s) during your tests
+    - sys-img-armeabi-v7a-android-16
+    - sys-img-armeabi-v7a-android-21
+    - sys-img-armeabi-v7a-android-22
+    - sys-img-armeabi-v7a-android-25
+
+licenses:
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
+  - 'android-sdk-preview-license-.+'
+
+script:
+  ./gradlew runUnitTests
+
+
+
+# используем язык java. Travis CI поддерживает другие языки тоже.
+#language: java
+#jdk:
   #- openjdk11
-  - oraclejdk8 before_install: - chmod +x gradlew - chmod +x gradle/wrapper/gradle-wrapper.jar script: - ./gradlew test build
+#  - oraclejdk8 before_install: - chmod +x gradlew - chmod +x gradle/wrapper/gradle-wrapper.jar script: - ./gradlew test build
 
 # используем режим обычного пользователя для сборки проекта.
-sudo: false
+#sudo: false
 
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+#after_success:
+#  - bash <(curl -s https://codecov.io/bash)
 
 # Отправлять уведомление на почтуyouremail@smtp.ru(Изменить на свою) если сборка упала
-notifications:
-  email:
-    recipients:
-      -dmk78@inbox.ru
-    on_success: never # default: change
-    on_failure: always # default: always
-env:
-  global:
-    - CODECOV_TOKEN="1f9a1cfa-9785-48cf-b78c-2fa2742f982e"
+#notifications:
+#  email:
+#    recipients:
+#      -dmk78@inbox.ru
+#    on_success: never # default: change
+#    on_failure: always # default: always
+#env:
+#  global:
+#    - CODECOV_TOKEN="1f9a1cfa-9785-48cf-b78c-2fa2742f982e"
 
 
 
