@@ -1,7 +1,7 @@
 package ru.job4j.tracker
 
 class StartUi : Action {
-    init {
+    fun init() {
         println("0 - Добавить заявку")
         println("1 - Показать все заявки")
         println("6 - Выйти")
@@ -29,5 +29,5 @@ class StartUi : Action {
 }
 
 fun main() {
-    StartUi()
+    StartUi().init()
 }
